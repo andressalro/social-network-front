@@ -1,23 +1,14 @@
 <template>
     <form class="form-signin" @submit.prevent="submit">
-      <h1 class="h3 mb-3 font-weight-normal">Registrarse</h1>
-
-      <label for="firstName" class="sr-only">Nombre </label>
-      <input type="text" id="firstName" class="form-control" placeholder="Nombre" required v-model="firstName">
-
-      <label for="lastName" class="sr-only">Apellido </label>
-      <input type="text" id="lastName" class="form-control" placeholder="Apellido" required v-model="lastName">
+      <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
 
       <label for="inputEmail" class="sr-only">Correo</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required v-model="email">
-
+      <input type="email" id="inputEmail" class="form-control" placeholder="Correo electronico" required v-model="email">
+      
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" id="inputPassword" class="form-control" placeholder="Password" required v-model="password">
-
-      <label for="inputPasswordConfirm" class="sr-only">Password Confirm</label>
-      <input type="password" id="passwordConfirm" class="form-control" placeholder="Password Confirm" required v-model="passwordConfirm">
-      
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Registrar</button>
+     
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
     </form>
 </template>
 
@@ -27,36 +18,23 @@ import axios from "axios";
 import {useRouter} from "vue-router";
 
 export default {
-    name: "RegisterView",
+    name: "LoginViewer",
     setup() {
-      const firstName = ref('');
-      const lastName = ref('');
       const email = ref('');
       const password = ref('');
-      const passwordConfirm = ref('');
       const router = useRouter();
 
       const submit = async () => {
-        const response = await axios.post(`auth/sign-up`, {
-          firstName: firstName.value,
-          lastName: lastName.value,
-          mail: email.value,
-          credential: {
-            password: password.value
-          }
+        await axios.post(`auth/sign-in`, {
+          email: email.value,
+          password: password.value
         });
-        if (response.data.token) {
-          localStorage.setItem("JWT", response.data.token);
-        }
-        await router.push('/login');
-      }
 
+        await router.push('/');
+      }
       return {
-        firstName,
-        lastName,
         email,
         password,
-        passwordConfirm,
         submit
       }
     }
