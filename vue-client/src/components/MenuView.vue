@@ -5,7 +5,7 @@
             <li class="nav-item">
               <a class="nav-link active" href="#">
                 <span data-feather="home"></span>
-                Dashboard
+                Publicaciones
               </a>
             </li>            
           </ul>
@@ -15,6 +15,6 @@
 
 <script>
 export default {
-    name: "MenuTemplate"
+    name: "MenuView"
 }
 </script>

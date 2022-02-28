@@ -1,45 +1,34 @@
 <template>
-    <Nav />
+    <NavView />
     <div class="container-fluid">
         <div class="row">
-        <Menu />
+        <MenuView />
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <h2>Section title</h2>
-            <div class="table-responsive">
-            <table class="table table-striped table-sm">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1,001</td>
-                    <td>Lorem</td>
-                    <td>ipsum</td>
-                    <td>dolor</td>
-                    <td>sit</td>
-                </tr>              
-                </tbody>
-            </table>
-            </div>
+            <router-view />
         </main>
         </div>
     </div>
 </template>
 
 <script>
-import Menu from "@/components/Menu";
-import Nav from "@/components/Nav";
+import {onMounted} from "vue";
+import MenuView from "@/components/MenuView";
+import NavView from "@/components/NavView";
+import axios from 'axios';
+
 export default {
     name: "DashboardTemplate",
     components: {
-    Menu,
-    Nav
+    MenuView,
+    NavView
+  },
+  setup() {
+      onMounted(async () => {
+          const response = await axios.get('api/v1/user/posts', {
+              headers: { Authorization: `Bearer ${localStorage.getItem("JWT")}`}
+          });
+          console.log(response);
+      });
   }
 }
 </script>
