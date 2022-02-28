@@ -31,3 +31,12 @@ Plantilla inicio de sesión: /login
 Plantilla registro de usuario: /register
 
 ![image](https://user-images.githubusercontent.com/40213377/156011823-2a368325-4218-4019-af3a-7410c71e6348.png)
+
+
+### Uso de cliente HTTP Axios
+
+Conexiones con los endpoints del Back-End:
+
+- /auth/sign-up
+- /auth/sign-in
+- /api/v1/user/posts
