@@ -23,6 +23,7 @@
 
 <script>
 import {ref} from "vue";
+import axios from "axios";
 
 export default {
     name: "RegisterView",
@@ -35,11 +36,18 @@ export default {
 
       const submit = () => {
         console.log({
+          
+        })
+        console.log(process.env.VUE_APP_API_URL);
+        axios.post(`http://localhost:3000/auth/sign-up`, {
           firstName: firstName.value,
           lastName: lastName.value,
-          email: email.value,
-          password: password.value,
-          passwordConfirm: passwordConfirm.value
+          mail: email.value,
+          credential: {
+            password: password.value
+          }
+        }).then( res => {
+          console.log(res);
         })
       }
 
