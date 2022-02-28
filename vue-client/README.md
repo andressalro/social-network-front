@@ -32,6 +32,13 @@ Plantilla registro de usuario: /register
 
 ![image](https://user-images.githubusercontent.com/40213377/156011823-2a368325-4218-4019-af3a-7410c71e6348.png)
 
+### Plantillas protegidas
+
+Plantilla de Dashboard: /
+
+#### Plantilla children 
+
+Plantilla de Publicaciones: /
 
 ### Uso de cliente HTTP Axios
 
