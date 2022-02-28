@@ -25,11 +25,13 @@ export default {
       const router = useRouter();
 
       const submit = async () => {
-        await axios.post(`auth/sign-in`, {
+        const response = await axios.post(`auth/sign-in`, {
           email: email.value,
           password: password.value
         });
-
+        if (response.data.token) {
+          localStorage.setItem("JWT", response.data.token);
+        }
         await router.push('/');
       }
       return {

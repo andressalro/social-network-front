@@ -14,7 +14,8 @@
 import {onMounted} from "vue";
 import MenuView from "@/components/MenuView";
 import NavView from "@/components/NavView";
-import axios from 'axios';
+import axios from "axios";
+import {useRouter} from "vue-router";
 
 export default {
     name: "DashboardTemplate",
@@ -23,11 +24,21 @@ export default {
     NavView
   },
   setup() {
+      const router = useRouter();
       onMounted(async () => {
-          const response = await axios.get('api/v1/user/posts', {
-              headers: { Authorization: `Bearer ${localStorage.getItem("JWT")}`}
-          });
-          console.log(response);
+          if (!localStorage.getItem("JWT")) {
+              await router.push("/login");
+          }
+
+          try {
+            const response = await axios.get('api/v1/user/posts', {
+            headers: { Authorization: `Bearer ${localStorage.getItem("JWT")}`}
+            });
+            console.log(response);
+          } catch (e) {
+              await router.push("/login");
+          }
+          
       });
   }
 }
